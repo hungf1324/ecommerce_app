@@ -25,6 +25,7 @@ class CartList extends StatelessWidget {
               textColor: Colors.deepOrange,
               fontWeight: FontWeight.bold,
               size: 32,
+              textAlign: TextAlign.center,
             ),
           )
         : Padding(
