@@ -11,6 +11,7 @@ import 'package:ecommerce_app/pages/home/components/product_panel.dart';
 import 'package:ecommerce_app/pages/production/production_page.dart';
 
 class HomePage extends StatefulWidget {
+  //something changed here
   const HomePage({Key? key}) : super(key: key);
 
   static const routeName = "homePage";
