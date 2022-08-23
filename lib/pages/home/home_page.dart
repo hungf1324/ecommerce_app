@@ -26,58 +26,64 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.home,
-            size: 32,
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        appBar: CustomAppBar(
+          leading: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.home,
+              size: 32,
+            ),
           ),
+          action: [
+            BadgeButton(
+              badgeCount: cartState.totalItems,
+              onPressedBadgeButton: () {
+                Navigator.of(context)
+                    .pushNamed(CartPage.routeName)
+                    .then((value) => _reload());
+              },
+            ),
+          ],
         ),
-        action: [
-          BadgeButton(
-            badgeCount: cartState.totalItems,
-            onPressedBadgeButton: () {
-              Navigator.of(context)
-                  .pushNamed(CartPage.routeName)
-                  .then((value) => _reload());
-            },
-          ),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 10),
-              const HelloPanel(userName: 'Rocky'),
-              const SizedBox(height: 25),
-              SaleOffPanel(
-                saleOffImage: ImgString.appleWatchImg,
-                onPressed: () {},
-              ),
-              const SizedBox(height: 25),
-              CategoriesPanel(
-                onPressedSeeAll: () {},
-                onPressedIcon: () {},
-              ),
-              const SizedBox(height: 25),
-              ProductPannel(
-                onPressed: (product) {
-                  Navigator.of(context)
-                      .pushNamed(
-                        ProductionPage.routeName,
-                        arguments: product,
-                      )
-                      .then((value) => _reload());
-                },
-                onPressedFavoriteButton: () {},
-              ),
-              const SizedBox(height: 20),
-            ],
+        body: Padding(
+          padding: const EdgeInsets.only(left: 20.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 10),
+                const HelloPanel(userName: 'Rocky'),
+                const SizedBox(height: 25),
+                SaleOffPanel(
+                  saleOffImage: ImgString.appleWatchImg,
+                  onPressed: () {},
+                ),
+                const SizedBox(height: 25),
+                CategoriesPanel(
+                  onPressedSeeAll: () {},
+                  onPressedIcon: () {},
+                ),
+                const SizedBox(height: 25),
+                ProductPanel(
+                  onPressed: (product) {
+                    print('Product: ${product.name}' );
+                    Navigator.of(context)
+                        .pushNamed(
+                          ProductionPage.routeName,
+                          arguments: product,
+                        )
+                        .then((value) => _reload());
+                  },
+                  onPressedFavoriteButton: () {
+
+                  },
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),

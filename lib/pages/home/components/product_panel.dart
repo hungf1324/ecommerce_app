@@ -6,17 +6,25 @@ import 'package:ecommerce_app/widgets/custom_text.dart';
 import 'package:ecommerce_app/widgets/round_image.dart';
 import 'package:flutter/material.dart';
 
-class ProductPannel extends StatelessWidget {
-  const ProductPannel({
+class ProductPanel extends StatefulWidget {
+   ProductPanel({
     Key? key,
     required this.onPressed,
     required this.onPressedFavoriteButton,
-    this.isFavorite = false,
+    //this.isFavorite = false,
   }) : super(key: key);
 
   final Function(ProductModel) onPressed;
   final Function()? onPressedFavoriteButton;
-  final bool isFavorite;
+
+
+  @override
+  State<ProductPanel> createState() => _ProductPanelState();
+}
+
+class _ProductPanelState extends State<ProductPanel> {
+
+  late bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +35,7 @@ class ProductPannel extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.7,
+          childAspectRatio: 0.6,
           crossAxisSpacing: 15,
           mainAxisSpacing: 15,
         ),
@@ -40,13 +48,13 @@ class ProductPannel extends StatelessWidget {
     );
   }
 
-  GestureDetector buildProductItem(
+  InkWell buildProductItem(
     BuildContext context,
     ProductModel product,
     int index,
   ) {
-    return GestureDetector(
-      onTap: () => onPressed(product),
+    return InkWell(
+      onTap: () => widget.onPressed(product),
       child: CustomContainer(
         color: Colors.grey[350],
         borderRadius: 10,
@@ -73,7 +81,13 @@ class ProductPannel extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: onPressedFavoriteButton,
+                    //onPressed: onPressedFavoriteButton,
+                    onPressed: () {
+                      isFavorite = !isFavorite;
+                      setState(() {
+
+                      });
+                    },
                     icon: Icon(
                       Icons.favorite_rounded,
                       color: isFavorite ? Colors.red : Colors.grey,

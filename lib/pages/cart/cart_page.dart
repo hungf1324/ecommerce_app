@@ -16,20 +16,23 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(title: 'My cart'),
-      bottomNavigationBar: CheckOutPanel(
-        onPressed: () {},
-      ),
-      body: CartList(
-        onPressedRemoveButton: (index) {
-          cartState.removeItem(index);
-          setState(() {});
-        },
-        onPressedAddButton: (index) {
-          cartState.addItem(index);
-          setState(() {});
-        },
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        appBar: CustomAppBar(title: 'My cart'),
+        bottomNavigationBar: CheckOutPanel(
+          onPressed: () {},
+        ),
+        body: CartList(
+          onPressedRemoveButton: (index) {
+            cartState.removeItem(index);
+            setState(() {});
+          },
+          onPressedAddButton: (index) {
+            cartState.addItem(index);
+            setState(() {});
+          },
+        ),
       ),
     );
   }
