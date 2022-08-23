@@ -18,7 +18,7 @@ class ProductionCover extends StatelessWidget {
         children: [
           RoundImage(
             imageAsset: product.image,
-            height: DeviceParameters.screenHeight(context) * .4,
+            height: DeviceParameters.screenHeight(context) * 0.4,
           ),
           const SizedBox(height: 5),
         ],

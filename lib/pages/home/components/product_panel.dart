@@ -28,23 +28,60 @@ class _ProductPanelState extends State<ProductPanel> {
 
   @override
   Widget build(BuildContext context) {
+
+    var _size = MediaQuery.of(context).size;
+
+    //int crossAxisCount =
+
+    // return Padding(
+    //   padding: const EdgeInsets.only(right: 20.0),
+    //   child: GridView.builder(
+    //     shrinkWrap: true,
+    //     physics: const NeverScrollableScrollPhysics(),
+    //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    //       crossAxisCount: _size.width < 600 ? 2 : 3,
+    //       childAspectRatio: 0.6,
+    //       crossAxisSpacing: 15,
+    //       mainAxisSpacing: 15,
+    //     ),
+    //     itemCount: productionList.length,
+    //     itemBuilder: (context, index) {
+    //       ProductModel product = productionList[index];
+    //       return buildProductItem(context, product, index);
+    //     },
+    //   ),
+    // );
+
     return Padding(
       padding: const EdgeInsets.only(right: 20.0),
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.6,
-          crossAxisSpacing: 15,
-          mainAxisSpacing: 15,
-        ),
-        itemCount: productionList.length,
-        itemBuilder: (context, index) {
-          ProductModel product = productionList[index];
-          return buildProductItem(context, product, index);
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (constraints.maxWidth < 600) {
+            return _buildGridView(crossAxisCount : 2);
+          } else {
+            return _buildGridView(crossAxisCount : 3);
+          }
         },
       ),
+    );
+  }
+
+  Widget _buildGridView({required int crossAxisCount}) {
+
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
+        childAspectRatio: 0.6,
+        crossAxisSpacing: 15,
+        mainAxisSpacing: 15,
+      ),
+      itemCount: productionList.length,
+      itemBuilder: (context, index) {
+        ProductModel product = productionList[index];
+        return buildProductItem(context, product, index);
+      },
     );
   }
 
@@ -130,3 +167,5 @@ class _ProductPanelState extends State<ProductPanel> {
     );
   }
 }
+
+

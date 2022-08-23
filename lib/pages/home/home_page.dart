@@ -26,6 +26,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    var _size = MediaQuery.of(context).size;
+    double width = _size.width;
+    double height = _size.height;
+
+    print ('Current Screen size: width - $width , height - $height');
+
     return SafeArea(
       top: false,
       child: Scaffold(
